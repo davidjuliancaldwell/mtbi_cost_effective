@@ -73,7 +73,10 @@ fig_2 <- ggplot(data_fig_2, aes(x = time, y = costs, color = group,size = n)) +
     color = "Costs/Charges",
     size = "Number of Subjects"
   ) +
-      theme_minimal()
+      theme_minimal() +
+    scale_color_hue(h = c(180, 300))
+
+
 
 
 ### figure 3
@@ -81,8 +84,9 @@ fig_2 <- ggplot(data_fig_2, aes(x = time, y = costs, color = group,size = n)) +
 dodge_position <- position_dodge(width = 0.5)
 
  fig_3 <-  ggplot(data_fig_3, aes(x = time, y = amount, color = group)) +
-      geom_beeswarm(aes(size = n), dodge.width = 0.5) + # Use dodge.width to avoid overlap
+      geom_beeswarm(aes(size = n)) + # Use dodge.width to avoid overlap
       geom_line(aes(group = study),alpha = 0.5) + # Connect points for each ID
+      facet_wrap(vars(group),nrow=1) +
   labs(
     title = "Costs/Charges Reported for mTBI Stratified by Year ",
     subtitle = "Each point is one study",
